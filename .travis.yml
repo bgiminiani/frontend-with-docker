@@ -7,3 +7,15 @@ before_install:
 
 script:
     - docker run -e CI=true giminiani/frontend-with-docker yarn test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: "frontend-with-docker"
+    env: "FrontendWithDocker-env"
+    bucket_file: "elasticbeanstalk-us-east-1-561820785305" 
+    bucket_path: "frontend-with-docker"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
